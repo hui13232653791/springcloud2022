@@ -1,0 +1,39 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: springcloud2022-config-center #注册进Eureka服务器的微服务名
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Wang1006/springcloud2022-config  #GitHub上面的git仓库名字
+          ####搜索目录
+          search-paths:
+            - springcloud2022-config
+          ####身份验证
+          force-pull: true
+          username: 1942590224@qq.com
+          password: qq7816073!!
+      ####读取分支
+      label: main
+  #rabbitmq相关配置<--------------------------
+  rabbitmq:
+    host: 192.168.196.131
+    port: 5672
+    username: guest
+    password: guest
+
+#服务注册到eureka地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+##rabbitmq相关配置,暴露bus刷新配置的端点<--------------------------
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
